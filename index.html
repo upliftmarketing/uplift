@@ -787,7 +787,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
-      align-items: start;
+      align-items: stretch;
     }
 
     .pricing-card {
@@ -798,6 +798,13 @@
       position: relative;
       overflow: hidden;
       transition: border-color 0.3s, transform 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pricing-card .pricing-cta {
+      margin-top: auto;
+      padding-top: 32px;
     }
 
     .pricing-card:hover {
@@ -902,7 +909,7 @@
     .pricing-cta {
       display: block;
       width: 100%;
-      margin-top: 32px;
+      margin-top: 0;
       background: transparent;
       color: var(--cream);
       border: 1px solid var(--black-border);
@@ -976,7 +983,7 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 28px;
-      align-items: start;
+      align-items: stretch;
     }
 
     @media (max-width: 1024px) {
@@ -1630,7 +1637,7 @@
     <div class="pricing-header reveal">
       <div class="section-eyebrow">What We Charge</div>
       <h2 class="section-title">Simple, Transparent<br/><span class="accent">Pricing.</span></h2>
-      <p class="section-body">No hidden fees. No surprises. Pick the service that fits your business.</p>
+      <p class="section-body">Whether you're just starting out or ready to scale — there's a package built for exactly where you are.</p>
     </div>
 
     <div class="pricing-tabs reveal">
