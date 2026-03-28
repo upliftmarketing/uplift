@@ -157,7 +157,7 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
-      padding: 120px 60px 80px;
+      padding: 120px 60px 140px;
       text-align: center;
     }
 
@@ -327,6 +327,7 @@
       gap: 8px;
       opacity: 0;
       animation: fadeIn 1s 1.5s ease forwards;
+      z-index: 2;
     }
 
     .hero-scroll span {
@@ -1000,6 +1001,190 @@
 
     .footer-bottom-links a:hover { color: var(--cream); }
 
+    /* ─── CONSULTATION MODAL ─────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .modal-box {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 20px;
+      padding: 52px 48px;
+      max-width: 560px;
+      width: 100%;
+      position: relative;
+      transform: translateY(24px);
+      transition: transform 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-overlay.open .modal-box {
+      transform: translateY(0);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: none;
+      border: none;
+      color: var(--gray);
+      font-size: 24px;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+      padding: 4px 8px;
+    }
+
+    .modal-close:hover { color: var(--cream); }
+
+    .modal-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 12px;
+    }
+
+    .modal-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .modal-sub {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 36px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gray-light);
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--black-border);
+      border-radius: 8px;
+      padding: 13px 16px;
+      font-size: 14px;
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      transition: border-color 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-group select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+
+    .form-group select option {
+      background: var(--black-card);
+      color: var(--cream);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: rgba(204,0,0,0.5);
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: var(--gray);
+    }
+
+    .form-submit {
+      width: 100%;
+      background: var(--red);
+      color: var(--white);
+      border: none;
+      border-radius: 6px;
+      padding: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      margin-top: 8px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .form-submit:hover {
+      background: var(--red-bright);
+      transform: translateY(-1px);
+    }
+
+    .form-success {
+      text-align: center;
+      padding: 24px 0;
+      display: none;
+    }
+
+    .form-success h3 {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--cream);
+      margin-bottom: 10px;
+    }
+
+    .form-success p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .modal-box { padding: 36px 24px; }
+    }
+
     /* ─── ANIMATIONS ─────────────────────────────────────── */
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
@@ -1038,7 +1223,7 @@
       .nav-links { display: none; }
       .nav-hamburger { display: flex; }
       section { padding: 80px 24px; }
-      #hero { padding: 120px 24px 80px; }
+      #hero { padding: 120px 24px 140px; }
       #cta { padding: 80px 24px; }
       .cta-inner { padding: 48px 28px; }
       .services-grid { grid-template-columns: 1fr; }
@@ -1208,10 +1393,10 @@
       <div class="service-card reveal">
         <div class="service-num">02</div>
         <div class="service-icon">
-          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         </div>
-        <div class="service-name">Paid Advertising (PPC)</div>
-        <div class="service-desc">Data-driven Meta and Google ad campaigns optimized for ROI. We spend your budget like it's our own — carefully and strategically.</div>
+        <div class="service-name">Website Development</div>
+        <div class="service-desc">Fast, clean, conversion-focused websites built from scratch. We design and develop digital experiences that look sharp and perform even sharper.</div>
       </div>
       <div class="service-card reveal">
         <div class="service-num">03</div>
@@ -1309,22 +1494,22 @@
     <div class="team-grid">
       <div class="team-card reveal">
         <div class="team-flag">🇹🇷</div>
-        <div class="team-avatar">U</div>
-        <div class="team-name">Founder I</div>
+        <div class="team-avatar">AC</div>
+        <div class="team-name">Ayberk Cakir</div>
         <div class="team-role">Strategy & Growth</div>
         <div class="team-school">Turkish · UMass Lowell</div>
       </div>
       <div class="team-card reveal">
         <div class="team-flag">🇹🇷</div>
-        <div class="team-avatar">U</div>
-        <div class="team-name">Founder II</div>
+        <div class="team-avatar">HK</div>
+        <div class="team-name">Harun Kaplan</div>
         <div class="team-role">Creative & Content</div>
         <div class="team-school">Turkish · UMass Lowell</div>
       </div>
       <div class="team-card reveal">
         <div class="team-flag">🇵🇸</div>
-        <div class="team-avatar">U</div>
-        <div class="team-name">Founder III</div>
+        <div class="team-avatar">KR</div>
+        <div class="team-name">Khaled Rajeh</div>
         <div class="team-role">Paid Media & Analytics</div>
         <div class="team-school">Palestinian · Purdue University</div>
       </div>
@@ -1338,7 +1523,7 @@
       <h2>Ready to <span class="accent">Uplift</span><br/>Your Brand?</h2>
       <p>Tell us what you're building. We'll tell you how to make people notice.</p>
       <div class="cta-actions">
-        <a href="mailto:upliftmarketers@gmail.com" class="btn-primary">Get a Free Consultation</a>
+        <button class="btn-primary" id="openConsultation">Get a Free Consultation</button>
         <a href="#services" class="btn-ghost">View Services</a>
       </div>
       <p class="cta-email">Or email us directly at <a href="mailto:upliftmarketers@gmail.com">upliftmarketers@gmail.com</a></p>
@@ -1375,7 +1560,7 @@
           <h4>Services</h4>
           <ul>
             <li><a href="#services">Social Media</a></li>
-            <li><a href="#services">Paid Ads</a></li>
+            <li><a href="#services">Web Dev</a></li>
             <li><a href="#services">SEO</a></li>
             <li><a href="#services">Branding</a></li>
           </ul>
@@ -1398,8 +1583,96 @@
     </div>
   </footer>
 
+  <!-- ═══ CONSULTATION MODAL ══════════════════════════════════ -->
+  <div class="modal-overlay" id="consultationModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeConsultation">&times;</button>
+      <div id="consultationForm">
+        <div class="modal-eyebrow">Free Consultation</div>
+        <div class="modal-title">Let's Talk About<br/>Your Brand</div>
+        <p class="modal-sub">Fill out the form below and we'll get back to you within 24 hours.</p>
+        <form id="consultForm">
+          <div class="form-group">
+            <label for="cf-name">Your Name</label>
+            <input type="text" id="cf-name" name="name" placeholder="John Smith" required />
+          </div>
+          <div class="form-group">
+            <label for="cf-business">Business Name</label>
+            <input type="text" id="cf-business" name="business" placeholder="Acme Co." required />
+          </div>
+          <div class="form-group">
+            <label for="cf-industry">Industry</label>
+            <select id="cf-industry" name="industry" required>
+              <option value="" disabled selected>Select your industry</option>
+              <option>E-Commerce</option>
+              <option>Food & Beverage</option>
+              <option>Health & Wellness</option>
+              <option>Fashion & Apparel</option>
+              <option>Technology</option>
+              <option>Real Estate</option>
+              <option>Education</option>
+              <option>Finance</option>
+              <option>Entertainment</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="cf-contact">Email or Phone Number</label>
+            <input type="text" id="cf-contact" name="contact" placeholder="hello@yourbrand.com or +1 555 000 0000" required />
+          </div>
+          <div class="form-group">
+            <label for="cf-comments">Comments <span style="font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+            <textarea id="cf-comments" name="comments" placeholder="Tell us about your goals, challenges, or anything you'd like us to know..."></textarea>
+          </div>
+          <button type="submit" class="form-submit">Send My Request</button>
+        </form>
+      </div>
+      <div class="form-success" id="formSuccess">
+        <p style="font-size:48px;margin-bottom:16px;">🎯</p>
+        <h3>You're on our radar.</h3>
+        <p>Thanks for reaching out. We'll be in touch within 24 hours to schedule your free consultation.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
   <script>
+    // Consultation modal
+    const modal = document.getElementById('consultationModal');
+    const openBtn = document.getElementById('openConsultation');
+    const closeBtn = document.getElementById('closeConsultation');
+
+    openBtn.addEventListener('click', () => modal.classList.add('open'));
+    closeBtn.addEventListener('click', () => modal.classList.remove('open'));
+    modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('open'); });
+
+    document.getElementById('consultForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const submitBtn = form.querySelector('.form-submit');
+      submitBtn.textContent = 'Sending...';
+      submitBtn.disabled = true;
+
+      const data = new FormData(form);
+      try {
+        const res = await fetch('https://formspree.io/f/xvzvzykr', {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          document.getElementById('consultationForm').style.display = 'none';
+          document.getElementById('formSuccess').style.display = 'block';
+        } else {
+          submitBtn.textContent = 'Something went wrong — try again';
+          submitBtn.disabled = false;
+        }
+      } catch {
+        submitBtn.textContent = 'Something went wrong — try again';
+        submitBtn.disabled = false;
+      }
+    });
+
     // Nav scroll effect
     const navbar = document.getElementById('navbar');
     window.addEventListener('scroll', () => {
