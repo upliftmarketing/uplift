@@ -761,88 +761,227 @@
 
     .why-big-quote .red { color: var(--red); }
 
-    /* ─── TEAM ───────────────────────────────────────────── */
-    #team {
+    /* ─── PRICING ────────────────────────────────────────── */
+    #pricing {
       background: var(--black);
     }
 
-    .team-header {
+    .pricing-header {
       max-width: 1200px;
       margin: 0 auto 72px;
       text-align: center;
     }
 
-    .team-header .section-eyebrow {
+    .pricing-header .section-eyebrow {
       justify-content: center;
     }
 
-    .team-header .section-body {
+    .pricing-header .section-body {
       margin: 0 auto;
       text-align: center;
     }
 
-    .team-grid {
-      max-width: 900px;
+    .pricing-grid {
+      max-width: 1200px;
       margin: 0 auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 28px;
+      align-items: start;
     }
 
-    .team-card {
+    .pricing-card {
       background: var(--black-card);
       border: 1px solid var(--black-border);
-      border-radius: 16px;
-      padding: 36px 28px;
-      text-align: center;
+      border-radius: 20px;
+      padding: 40px 36px;
+      position: relative;
+      overflow: hidden;
       transition: border-color 0.3s, transform 0.3s;
     }
 
-    .team-card:hover {
-      border-color: rgba(204,0,0,0.35);
+    .pricing-card:hover {
+      border-color: rgba(204,0,0,0.4);
       transform: translateY(-4px);
     }
 
-    .team-avatar {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--red-dim);
-      border: 2px solid rgba(204,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--red);
+    .pricing-card.featured {
+      border-color: rgba(204,0,0,0.5);
+      background: linear-gradient(160deg, rgba(204,0,0,0.07) 0%, var(--black-card) 50%);
     }
 
-    .team-name {
-      font-size: 17px;
+    .pricing-badge {
+      display: inline-block;
+      background: var(--red);
+      color: var(--white);
+      font-size: 10px;
       font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .pricing-emoji {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .pricing-name {
+      font-size: 22px;
+      font-weight: 800;
       color: var(--cream);
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .pricing-tagline {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .pricing-price {
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--red);
+      letter-spacing: -0.03em;
+      line-height: 1;
       margin-bottom: 6px;
     }
 
-    .team-role {
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    .pricing-desc {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-bottom: 28px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--black-border);
+    }
+
+    .pricing-section-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       color: var(--red);
-      margin-bottom: 14px;
+      margin-bottom: 12px;
+      margin-top: 20px;
     }
 
-    .team-school {
-      font-size: 12px;
+    .pricing-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 0;
+    }
+
+    .pricing-list li {
+      font-size: 13px;
+      color: var(--gray-light);
+      line-height: 1.4;
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
+
+    .pricing-list li::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .pricing-cta {
+      display: block;
+      width: 100%;
+      margin-top: 32px;
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid var(--black-border);
+      border-radius: 6px;
+      padding: 13px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-align: center;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      font-family: 'Inter', sans-serif;
+      text-decoration: none;
+    }
+
+    .pricing-card.featured .pricing-cta {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+    }
+
+    .pricing-cta:hover {
+      background: var(--red);
+      border-color: var(--red);
+      color: var(--white);
+      transform: translateY(-1px);
+    }
+
+    /* ─── PRICING TABS ───────────────────────────────────── */
+    .pricing-tabs {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 56px;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 10px;
+      padding: 6px;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .pricing-tab {
+      padding: 11px 28px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      border: none;
+      background: transparent;
       color: var(--gray);
-      line-height: 1.5;
+      font-family: 'Inter', sans-serif;
+      transition: background 0.2s, color 0.2s;
     }
 
-    .team-flag {
-      font-size: 20px;
-      margin-bottom: 4px;
+    .pricing-tab.active {
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .pricing-panel { display: none; }
+    .pricing-panel.active { display: block; }
+
+    .pricing-grid-marketing {
+      max-width: 860px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    @media (max-width: 1024px) {
+      .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
+      .pricing-grid-marketing { grid-template-columns: 1fr; max-width: 480px; }
     }
 
     /* ─── CTA ────────────────────────────────────────────── */
@@ -1258,7 +1397,7 @@
       <li><a href="#about">About</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#why">Why Us</a></li>
-      <li><a href="#team">Team</a></li>
+      <li><a href="#pricing">Pricing</a></li>
       <li><a href="#cta" class="nav-cta">Get Started</a></li>
     </ul>
     <div class="nav-hamburger" id="menuToggle">
@@ -1486,33 +1625,168 @@
     </div>
   </section>
 
-  <!-- ═══ TEAM ════════════════════════════════════════════════ -->
-  <section id="team">
-    <div class="team-header reveal">
-      <div class="section-eyebrow">The Team</div>
-      <h2 class="section-title" style="text-align:center;">Three Founders.<br/><span class="accent">One Mission.</span></h2>
-      <p class="section-body" style="text-align:center;margin:0 auto;">Different backgrounds, same relentless drive to build brands that matter.</p>
+  <!-- ═══ PRICING ══════════════════════════════════════════════ -->
+  <section id="pricing">
+    <div class="pricing-header reveal">
+      <div class="section-eyebrow">What We Charge</div>
+      <h2 class="section-title">Simple, Transparent<br/><span class="accent">Pricing.</span></h2>
+      <p class="section-body">No hidden fees. No surprises. Pick the service that fits your business.</p>
     </div>
-    <div class="team-grid">
-      <div class="team-card reveal">
-        <div class="team-avatar">AC</div>
-        <div class="team-name">Ayberk Cakir</div>
-        <div class="team-role">CEO & Co-Founder</div>
-        <div class="team-school">UMass Lowell · New Jersey</div>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">HK</div>
-        <div class="team-name">Harun Kaplan</div>
-        <div class="team-role">CMO & Co-Founder</div>
-        <div class="team-school">UMass Lowell · Massachusetts</div>
-      </div>
-      <div class="team-card reveal">
-        <div class="team-avatar">KR</div>
-        <div class="team-name">Khaled Rajeh</div>
-        <div class="team-role">CSO & Co-Founder</div>
-        <div class="team-school">Purdue University · Texas</div>
-      </div>
+
+    <div class="pricing-tabs reveal">
+      <button class="pricing-tab active" data-tab="webdev">Website Development</button>
+      <button class="pricing-tab" data-tab="marketing">Social Media Marketing</button>
     </div>
+
+    <div class="pricing-panel active" id="panel-webdev">
+    <div class="pricing-grid">
+
+      <!-- Base -->
+      <div class="pricing-card reveal">
+        <span class="pricing-emoji">🌐</span>
+        <div class="pricing-name">Base Package</div>
+        <div class="pricing-tagline">"The Essentials"</div>
+        <div class="pricing-price">$499</div>
+        <p class="pricing-desc">Perfect for small businesses or individuals looking to establish their online presence for the first time. Everything you need to get found online and make a great first impression.</p>
+        <div class="pricing-section-label">Includes</div>
+        <ul class="pricing-list">
+          <li>Up to 3 pages (Home, About, Contact)</li>
+          <li>Clean and professional design</li>
+          <li>Mobile friendly layout</li>
+          <li>Basic contact form</li>
+          <li>Social media links</li>
+          <li>1 revision</li>
+        </ul>
+        <div class="pricing-section-label">Ideal For</div>
+        <ul class="pricing-list">
+          <li>Salons &amp; Barbershops</li>
+          <li>Small restaurants &amp; food trucks</li>
+          <li>Churches &amp; nonprofits</li>
+          <li>Freelance photographers</li>
+          <li>Artists &amp; creatives</li>
+        </ul>
+        <button class="pricing-cta" id="openConsultationPricing1">Get Started</button>
+      </div>
+
+      <!-- Pro -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Most Popular</div>
+        <span class="pricing-emoji">⚡</span>
+        <div class="pricing-name">Pro Package</div>
+        <div class="pricing-tagline">"The Professional"</div>
+        <div class="pricing-price">$999</div>
+        <p class="pricing-desc">Ideal for growing businesses that need a more complete and customized online presence. Designed to make your brand stand out and convert visitors into customers.</p>
+        <div class="pricing-section-label">Includes</div>
+        <ul class="pricing-list">
+          <li>Up to 7 pages</li>
+          <li>Fully custom design tailored to your brand</li>
+          <li>Mobile friendly layout</li>
+          <li>Contact form</li>
+          <li>Social media integration</li>
+          <li>Basic SEO setup</li>
+          <li>3 revisions</li>
+        </ul>
+        <div class="pricing-section-label">Ideal For</div>
+        <ul class="pricing-list">
+          <li>Gyms &amp; fitness studios</li>
+          <li>Real estate agents</li>
+          <li>Law firms &amp; consultants</li>
+          <li>Medical &amp; dental offices</li>
+          <li>Auto dealerships &amp; repair shops</li>
+        </ul>
+        <button class="pricing-cta" id="openConsultationPricing2">Get Started</button>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card reveal">
+        <span class="pricing-emoji">👑</span>
+        <div class="pricing-name">Premium Package</div>
+        <div class="pricing-tagline">"The Full Experience"</div>
+        <div class="pricing-price">$2,499</div>
+        <p class="pricing-desc">For businesses that want the complete package with no limits. A fully custom, high-end website built to impress, perform, and grow with your business.</p>
+        <div class="pricing-section-label">Includes</div>
+        <ul class="pricing-list">
+          <li>Unlimited pages</li>
+          <li>Premium custom design with animations</li>
+          <li>Mobile friendly layout</li>
+          <li>Advanced contact form</li>
+          <li>Full social media integration</li>
+          <li>Full SEO setup</li>
+          <li>Priority support</li>
+          <li>Unlimited revisions</li>
+        </ul>
+        <div class="pricing-section-label">Ideal For</div>
+        <ul class="pricing-list">
+          <li>E-commerce &amp; online stores</li>
+          <li>Hotels &amp; hospitality</li>
+          <li>Music artists &amp; entertainment</li>
+          <li>Corporate businesses &amp; startups</li>
+          <li>Construction &amp; large contractors</li>
+        </ul>
+        <button class="pricing-cta" id="openConsultationPricing3">Get Started</button>
+      </div>
+
+    </div>
+    </div><!-- end panel-webdev -->
+
+    <div class="pricing-panel" id="panel-marketing">
+      <div class="pricing-grid-marketing">
+
+        <!-- Starter -->
+        <div class="pricing-card reveal">
+          <span class="pricing-emoji">📈</span>
+          <div class="pricing-name">Starter Package</div>
+          <div class="pricing-tagline">"Get Noticed"</div>
+          <div class="pricing-price" style="font-size:38px;">$599<span style="font-size:16px;font-weight:500;color:var(--gray);letter-spacing:0;">/mo</span></div>
+          <p class="pricing-desc">Perfect for small businesses looking to establish a consistent and professional social media presence with real content that represents their brand.</p>
+          <div class="pricing-section-label">Includes</div>
+          <ul class="pricing-list">
+            <li>5–8 posts per month (posts, reels &amp; stories)</li>
+            <li>1 on-location shoot per month</li>
+            <li>Professional photo &amp; video content</li>
+            <li>Video editing</li>
+            <li>Basic analytics report</li>
+          </ul>
+          <div class="pricing-section-label">Ideal For</div>
+          <ul class="pricing-list">
+            <li>💇 Salons &amp; Barbershops</li>
+            <li>🍕 Small restaurants &amp; food trucks</li>
+            <li>🎨 Artists &amp; creatives</li>
+            <li>🙏 Churches &amp; nonprofits</li>
+          </ul>
+          <button class="pricing-cta" id="openConsultationMkt1">Get Started</button>
+        </div>
+
+        <!-- Growth -->
+        <div class="pricing-card featured reveal">
+          <div class="pricing-badge">Most Popular</div>
+          <span class="pricing-emoji">👑</span>
+          <div class="pricing-name">Growth Package</div>
+          <div class="pricing-tagline">"Build Your Brand"</div>
+          <div class="pricing-price" style="font-size:38px;">$999<span style="font-size:16px;font-weight:500;color:var(--gray);letter-spacing:0;">/mo</span></div>
+          <p class="pricing-desc">For businesses ready to take their brand to the next level with a full creative agency experience across multiple platforms.</p>
+          <div class="pricing-section-label">Includes</div>
+          <ul class="pricing-list">
+            <li>10–12 posts per month (posts, reels &amp; stories)</li>
+            <li>2 on-location shoots per month</li>
+            <li>Professional photo &amp; video content</li>
+            <li>Video editing</li>
+            <li>Instagram &amp; TikTok management</li>
+            <li>Detailed analytics &amp; insights report</li>
+          </ul>
+          <div class="pricing-section-label">Ideal For</div>
+          <ul class="pricing-list">
+            <li>🏋️ Gyms &amp; fitness studios</li>
+            <li>🏠 Real estate agents</li>
+            <li>🛍️ Small e-commerce businesses</li>
+            <li>🎵 Music artists &amp; entertainment</li>
+          </ul>
+          <button class="pricing-cta" id="openConsultationMkt2">Get Started</button>
+        </div>
+
+      </div>
+    </div><!-- end panel-marketing -->
+
   </section>
 
   <!-- ═══ CTA ═════════════════════════════════════════════════ -->
@@ -1551,7 +1825,7 @@
           <h4>Company</h4>
           <ul>
             <li><a href="#about">About</a></li>
-            <li><a href="#team">Team</a></li>
+            <li><a href="#pricing">Pricing</a></li>
             <li><a href="#why">Why Us</a></li>
           </ul>
         </div>
@@ -1562,6 +1836,7 @@
             <li><a href="#services">Web Dev</a></li>
             <li><a href="#services">SEO</a></li>
             <li><a href="#services">Branding</a></li>
+            <li><a href="#pricing">Pricing</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -1636,6 +1911,21 @@
 
   <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
   <script>
+    // Pricing tabs
+    document.querySelectorAll('.pricing-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Pricing card buttons open consultation modal
+    ['openConsultationPricing1','openConsultationPricing2','openConsultationPricing3','openConsultationMkt1','openConsultationMkt2'].forEach(id => {
+      document.getElementById(id).addEventListener('click', () => modal.classList.add('open'));
+    });
+
     // Consultation modal
     const modal = document.getElementById('consultationModal');
     const openBtn = document.getElementById('openConsultation');
