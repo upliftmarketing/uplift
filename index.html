@@ -725,41 +725,65 @@
       align-self: stretch;
     }
 
-    .why-big-card {
-      background: var(--black-card);
-      border: 1px solid var(--black-border);
-      border-radius: 20px;
-      padding: 52px;
-      text-align: center;
+    .why-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       position: relative;
-      overflow: hidden;
+      cursor: default;
     }
 
-    .why-big-card::before {
-      content: '';
+    .why-logo-wrap svg {
+      width: 260px;
+      height: 260px;
+      animation: logoFloat 4s ease-in-out infinite;
+      filter: drop-shadow(0 0 30px rgba(204,0,0,0.25));
+      transition: filter 0.4s ease;
+    }
+
+    .why-logo-wrap:hover svg {
+      filter: drop-shadow(0 0 60px rgba(204,0,0,0.55));
+      animation-play-state: paused;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-12px) rotate(1.5deg); }
+      66% { transform: translateY(6px) rotate(-1deg); }
+    }
+
+    .why-logo-hover-text {
       position: absolute;
       inset: 0;
-      background: radial-gradient(circle at 50% 0%, rgba(204,0,0,0.12) 0%, transparent 60%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
     }
 
-    .why-big-card svg {
-      width: 90px;
-      height: 90px;
-      margin: 0 auto 28px;
-      display: block;
-      position: relative;
+    .why-logo-wrap:hover .why-logo-hover-text {
+      opacity: 1;
     }
 
-    .why-big-quote {
-      font-size: 22px;
-      font-weight: 700;
+    .why-logo-wrap:hover svg {
+      opacity: 0.15;
+    }
+
+    .why-logo-hover-text p {
+      font-size: 24px;
+      font-weight: 800;
       color: var(--cream);
-      line-height: 1.35;
-      letter-spacing: -0.01em;
-      position: relative;
+      line-height: 1.4;
+      letter-spacing: -0.02em;
+      text-align: center;
     }
 
-    .why-big-quote .red { color: var(--red); }
+    .why-logo-hover-text p span {
+      color: var(--red);
+    }
 
     /* ─── PRICING ────────────────────────────────────────── */
     #pricing {
@@ -1616,15 +1640,15 @@
         </div>
       </div>
       <div class="why-visual reveal">
-        <div class="why-big-card">
+        <div class="why-logo-wrap">
           <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
             <polygon points="100,20 20,100 100,180 100,20" fill="#CC0000" opacity="0.9"/>
             <polygon points="100,20 180,100 100,180 100,20" fill="#CC0000" opacity="0.7"/>
             <rect x="96" y="20" width="8" height="160" fill="#1a1a1a"/>
           </svg>
-          <p class="why-big-quote">
-            "Real people.<br/>Real strategy.<br/><span class="red">Built different.</span>"
-          </p>
+          <div class="why-logo-hover-text">
+            <p>Real people.<br/>Real strategy.<br/><span>Built different.</span></p>
+          </div>
         </div>
       </div>
     </div>
