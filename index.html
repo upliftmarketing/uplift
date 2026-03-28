@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uplift Marketing — Real People. Real Strategy. Built Different.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0d0d0d;
+      --black-soft: #141414;
+      --black-card: #1a1a1a;
+      --black-border: #262626;
+      --red: #CC0000;
+      --red-bright: #E00000;
+      --red-dim: rgba(204, 0, 0, 0.12);
+      --cream: #F2EDE4;
+      --white: #ffffff;
+      --gray: #888888;
+      --gray-light: #b0b0b0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--red); border-radius: 2px; }
+
+    /* ─── NOISE OVERLAY ─────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, padding 0.4s, border-bottom 0.4s;
+    }
+
+    nav.scrolled {
+      background: rgba(13, 13, 13, 0.92);
+      backdrop-filter: blur(20px);
+      padding: 16px 60px;
+      border-bottom: 1px solid var(--black-border);
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav-logo-text span:first-child {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+    }
+
+    .nav-logo-text span:last-child {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      color: var(--gray);
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-light);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+
+    .nav-cta {
+      background: var(--red);
+      color: var(--white) !important;
+      padding: 10px 24px;
+      border-radius: 4px;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--red-bright) !important; color: var(--white) !important; }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--cream);
+      border-radius: 1px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 120px 60px 80px;
+      text-align: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(204,0,0,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--red-dim);
+      border: 1px solid rgba(204,0,0,0.3);
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--red-bright);
+      margin-bottom: 36px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.7s 0.2s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--red);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.4); }
+    }
+
+    .hero-logo-mark {
+      margin-bottom: 40px;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: fadeScale 0.8s 0.4s ease forwards;
+    }
+
+    .hero-logo-mark svg {
+      width: 100px;
+      height: 100px;
+    }
+
+    h1 {
+      font-size: clamp(44px, 7vw, 88px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      color: var(--cream);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 0.8s 0.5s ease forwards;
+    }
+
+    h1 .accent { color: var(--red); }
+
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 400;
+      color: var(--gray-light);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 52px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.7s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s 0.9s ease forwards;
+    }
+
+    .btn-primary {
+      background: var(--red);
+      color: var(--white);
+      padding: 16px 36px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--red-bright);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(204,0,0,0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--cream);
+      padding: 15px 36px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+      border: 1px solid var(--black-border);
+    }
+
+    .btn-ghost:hover {
+      background: var(--black-card);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeIn 1s 1.5s ease forwards;
+    }
+
+    .hero-scroll span {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gray);
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 50px;
+      background: linear-gradient(to bottom, var(--red), transparent);
+      animation: scrollAnim 2s infinite;
+    }
+
+    @keyframes scrollAnim {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    /* ─── TICKER ─────────────────────────────────────────── */
+    .ticker-wrap {
+      overflow: hidden;
+      background: var(--red);
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      width: max-content;
+      animation: ticker 30s linear infinite;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 0 40px;
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .ticker-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      flex-shrink: 0;
+    }
+
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTIONS SHARED ────────────────────────────────── */
+    section {
+      padding: 120px 60px;
+    }
+
+    .section-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--cream);
+      margin-bottom: 24px;
+    }
+
+    .section-title .accent { color: var(--red); }
+
+    .section-body {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--gray-light);
+      line-height: 1.75;
+      max-width: 680px;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
+    #about {
+      background: var(--black-soft);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: '';
+      position: absolute;
+      right: -200px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(204,0,0,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      padding: 48px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(204,0,0,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .about-card-icon {
+      margin-bottom: 32px;
+    }
+
+    .about-card-icon svg {
+      width: 72px;
+      height: 72px;
+    }
+
+    .about-stat-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .about-stat {
+      padding: 24px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--black-border);
+      border-radius: 10px;
+    }
+
+    .about-stat-num {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--red);
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .about-stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .about-text .section-body {
+      margin-bottom: 24px;
+    }
+
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 36px;
+    }
+
+    .tag {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--gray-light);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── SERVICES ───────────────────────────────────────── */
+    #services {
+      background: var(--black);
+      max-width: 100%;
+    }
+
+    .services-header {
+      max-width: 1200px;
+      margin: 0 auto 72px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .services-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: default;
+    }
+
+    .service-card:hover {
+      border-color: rgba(204,0,0,0.4);
+      transform: translateY(-4px);
+    }
+
+    .service-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+
+    .service-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .service-num {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: var(--red);
+      margin-bottom: 28px;
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--red-dim);
+      border: 1px solid rgba(204,0,0,0.2);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .service-icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .service-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 14px;
+      letter-spacing: -0.01em;
+    }
+
+    .service-desc {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ─── WHY US ─────────────────────────────────────────── */
+    #why {
+      background: var(--black-soft);
+      position: relative;
+    }
+
+    .why-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .why-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      margin-top: 48px;
+    }
+
+    .why-item {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      padding: 28px;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 12px;
+      transition: border-color 0.3s;
+    }
+
+    .why-item:hover { border-color: rgba(204,0,0,0.35); }
+
+    .why-item-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--red-dim);
+      border: 1px solid rgba(204,0,0,0.2);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .why-item-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--red);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .why-item h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+
+    .why-item p {
+      font-size: 14px;
+      color: var(--gray);
+      line-height: 1.65;
+    }
+
+    .why-visual {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .why-big-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 20px;
+      padding: 52px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-big-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 0%, rgba(204,0,0,0.12) 0%, transparent 60%);
+    }
+
+    .why-big-card svg {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 28px;
+      display: block;
+      position: relative;
+    }
+
+    .why-big-quote {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+
+    .why-big-quote .red { color: var(--red); }
+
+    /* ─── TEAM ───────────────────────────────────────────── */
+    #team {
+      background: var(--black);
+    }
+
+    .team-header {
+      max-width: 1200px;
+      margin: 0 auto 72px;
+      text-align: center;
+    }
+
+    .team-header .section-eyebrow {
+      justify-content: center;
+    }
+
+    .team-header .section-body {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .team-grid {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .team-card {
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 16px;
+      padding: 36px 28px;
+      text-align: center;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .team-card:hover {
+      border-color: rgba(204,0,0,0.35);
+      transform: translateY(-4px);
+    }
+
+    .team-avatar {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--red-dim);
+      border: 2px solid rgba(204,0,0,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--red);
+    }
+
+    .team-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+
+    .team-role {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 14px;
+    }
+
+    .team-school {
+      font-size: 12px;
+      color: var(--gray);
+      line-height: 1.5;
+    }
+
+    .team-flag {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    /* ─── CTA ────────────────────────────────────────────── */
+    #cta {
+      background: var(--black-soft);
+      padding: 140px 60px;
+    }
+
+    .cta-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--black-card);
+      border: 1px solid var(--black-border);
+      border-radius: 24px;
+      padding: 80px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% -10%, rgba(204,0,0,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .cta-inner .section-eyebrow { justify-content: center; }
+
+    .cta-inner h2 {
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+      color: var(--cream);
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .cta-inner h2 .accent { color: var(--red); }
+
+    .cta-inner p {
+      font-size: 18px;
+      color: var(--gray-light);
+      margin-bottom: 44px;
+      line-height: 1.65;
+      position: relative;
+    }
+
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .cta-email {
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 24px;
+      position: relative;
+    }
+
+    .cta-email a {
+      color: var(--red);
+      text-decoration: none;
+    }
+
+    .cta-email a:hover { text-decoration: underline; }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--black-border);
+      padding: 56px 60px 40px;
+    }
+
+    .footer-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 60px;
+      max-width: 1200px;
+      margin: 0 auto 48px;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+
+    .footer-links-grid {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 20px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-col a {
+      font-size: 14px;
+      color: var(--gray-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-col a:hover { color: var(--cream); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--black-border);
+      padding-top: 32px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-bottom p {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .footer-bottom-links a {
+      font-size: 12px;
+      color: var(--gray);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-bottom-links a:hover { color: var(--cream); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────────── */
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeScale {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid, .why-grid { grid-template-columns: 1fr; gap: 48px; }
+      .about-visual { order: -1; }
+      .footer-links-grid { gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      nav { padding: 20px 24px; }
+      nav.scrolled { padding: 14px 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 80px 24px; }
+      #hero { padding: 120px 24px 80px; }
+      #cta { padding: 80px 24px; }
+      .cta-inner { padding: 48px 28px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; max-width: 380px; }
+      .services-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      footer { padding: 48px 24px 32px; }
+      .footer-top { flex-direction: column; gap: 40px; }
+      .footer-links-grid { gap: 32px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .about-stat-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAV ═══════════════════════════════════════════════ -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="50,5 5,50 50,95 50,5" fill="#CC0000"/>
+        <polygon points="50,5 95,50 50,95 50,5" fill="#CC0000"/>
+        <rect x="47" y="5" width="6" height="90" fill="#0d0d0d"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span>UPLIFT</span>
+        <span>MARKETING</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#cta" class="nav-cta">Get Started</a></li>
+    </ul>
+    <div class="nav-hamburger" id="menuToggle">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══════════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-bg">
+      <div class="hero-glow"></div>
+      <div class="hero-grid"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Digital Marketing Agency</div>
+      <div class="hero-logo-mark">
+        <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="100,10 10,100 100,190 100,10" fill="#CC0000"/>
+          <polygon points="100,10 190,100 100,190 100,10" fill="#CC0000"/>
+          <rect x="94" y="10" width="12" height="180" fill="#0d0d0d"/>
+        </svg>
+      </div>
+      <h1>We Don't Just<br/>Market.<br/><span class="accent">We Build Brands.</span></h1>
+      <p class="hero-sub">
+        Three founders. Two countries. One mission. We combine sharp strategy, native digital instincts, and genuine creative obsession to grow brands that matter.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">Start a Project</a>
+        <a href="#about" class="btn-ghost">Our Story</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ═══ TICKER ════════════════════════════════════════════ -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <div class="ticker-item">Social Media Strategy <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Paid Advertising <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Brand Identity <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Content Creation <span class="ticker-dot"></span></div>
+      <div class="ticker-item">SEO & Growth <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Email Marketing <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Analytics & Reporting <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Influencer Campaigns <span class="ticker-dot"></span></div>
+      <!-- duplicate for infinite loop -->
+      <div class="ticker-item">Social Media Strategy <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Paid Advertising <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Brand Identity <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Content Creation <span class="ticker-dot"></span></div>
+      <div class="ticker-item">SEO & Growth <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Email Marketing <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Analytics & Reporting <span class="ticker-dot"></span></div>
+      <div class="ticker-item">Influencer Campaigns <span class="ticker-dot"></span></div>
+    </div>
+  </div>
+
+  <!-- ═══ ABOUT ══════════════════════════════════════════════ -->
+  <section id="about">
+    <div class="about-grid">
+      <div class="about-visual reveal">
+        <div class="about-card">
+          <div class="about-card-icon">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <polygon points="100,15 15,100 100,185 100,15" fill="#CC0000" opacity="0.9"/>
+              <polygon points="100,15 185,100 100,185 100,15" fill="#CC0000" opacity="0.7"/>
+              <rect x="96" y="15" width="8" height="170" fill="#1a1a1a"/>
+            </svg>
+          </div>
+          <p style="font-size:18px;font-weight:600;color:var(--cream);line-height:1.5;margin-bottom:12px;">"We didn't stumble into marketing — we grew up online."</p>
+          <p style="font-size:14px;color:var(--gray);line-height:1.65;">We watched brands rise and fall on a scroll, and knew early on that we understood this digital world differently. That perspective is our edge.</p>
+          <div class="about-stat-row">
+            <div class="about-stat">
+              <div class="about-stat-num">3</div>
+              <div class="about-stat-label">Founders</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-num">2</div>
+              <div class="about-stat-label">Countries</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-num">100%</div>
+              <div class="about-stat-label">Dedicated</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-num">∞</div>
+              <div class="about-stat-label">Drive</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-text reveal">
+        <div class="section-eyebrow">About Us</div>
+        <h2 class="section-title">Built on <span class="accent">Friendship.</span><br/>Powered by Results.</h2>
+        <p class="section-body">
+          We're a digital marketing agency built on something most agencies can't claim — a friendship that's lasted a lifetime. Two Turkish students hustling through UMass Lowell, and one Palestinian Purdue grad who turned his degree into results.
+        </p>
+        <p class="section-body">
+          Different backgrounds, same relentless drive. We're not a big agency with a hundred clients and a template for every problem. We're three people who genuinely care about your brand, argue over every creative decision, and won't stop until the work is something we're proud of.
+        </p>
+        <div class="about-tags">
+          <span class="tag">Real People</span>
+          <span class="tag">Real Strategy</span>
+          <span class="tag">Built Different</span>
+          <span class="tag">UMass Lowell</span>
+          <span class="tag">Purdue</span>
+          <span class="tag">Digital Natives</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ SERVICES ═══════════════════════════════════════════ -->
+  <section id="services">
+    <div class="services-header reveal">
+      <div>
+        <div class="section-eyebrow">What We Do</div>
+        <h2 class="section-title">Services Built for<br/><span class="accent">Modern Brands</span></h2>
+      </div>
+      <p style="font-size:15px;color:var(--gray);line-height:1.7;max-width:340px;">Every service we offer is tailored — not templated. We build strategies that fit your brand, your audience, and your goals.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal">
+        <div class="service-num">01</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="service-name">Social Media Management</div>
+        <div class="service-desc">From content calendars to community management — we grow your presence with content that actually converts. No filler, only fire.</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">02</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+        </div>
+        <div class="service-name">Paid Advertising (PPC)</div>
+        <div class="service-desc">Data-driven Meta and Google ad campaigns optimized for ROI. We spend your budget like it's our own — carefully and strategically.</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">03</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="service-name">SEO & Content Strategy</div>
+        <div class="service-desc">Organic growth that compounds over time. We build content strategies that rank, resonate, and bring the right people to your door.</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">04</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+        </div>
+        <div class="service-name">Brand Identity & Creative</div>
+        <div class="service-desc">We craft visual identities, brand voices, and creative systems that make your brand impossible to ignore and easy to remember.</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">05</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="service-name">Email Marketing</div>
+        <div class="service-desc">High-converting email sequences, newsletters, and automation flows that nurture leads and turn subscribers into loyal customers.</div>
+      </div>
+      <div class="service-card reveal">
+        <div class="service-num">06</div>
+        <div class="service-icon">
+          <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        </div>
+        <div class="service-name">Analytics & Reporting</div>
+        <div class="service-desc">No vanity metrics. We track what matters, translate data into decisions, and give you full visibility into what's driving your growth.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ WHY US ══════════════════════════════════════════════ -->
+  <section id="why">
+    <div class="why-grid">
+      <div class="why-text reveal">
+        <div class="section-eyebrow">Why Uplift</div>
+        <h2 class="section-title">We're Not Like<br/><span class="accent">Other Agencies.</span></h2>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-item-icon">
+              <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <h3>Personal Attention, Every Time</h3>
+              <p>You work directly with the founders — not an account manager or intern. Your brand gets our undivided focus and real strategic thinking.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-icon">
+              <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <div>
+              <h3>Digital Natives, Not Digital Tourists</h3>
+              <p>We didn't learn the internet in a classroom. We grew up in it. We understand algorithms, culture, and what actually makes people stop scrolling.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-item-icon">
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <h3>Results-Obsessed Culture</h3>
+              <p>We argue over every creative decision because mediocre work isn't in our vocabulary. If we're not proud of it, it doesn't leave our hands.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-visual reveal">
+        <div class="why-big-card">
+          <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <polygon points="100,20 20,100 100,180 100,20" fill="#CC0000" opacity="0.9"/>
+            <polygon points="100,20 180,100 100,180 100,20" fill="#CC0000" opacity="0.7"/>
+            <rect x="96" y="20" width="8" height="160" fill="#1a1a1a"/>
+          </svg>
+          <p class="why-big-quote">
+            "Real people.<br/>Real strategy.<br/><span class="red">Built different.</span>"
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TEAM ════════════════════════════════════════════════ -->
+  <section id="team">
+    <div class="team-header reveal">
+      <div class="section-eyebrow">The Team</div>
+      <h2 class="section-title" style="text-align:center;">Three Founders.<br/><span class="accent">One Mission.</span></h2>
+      <p class="section-body" style="text-align:center;margin:0 auto;">Different backgrounds, same relentless drive to build brands that matter.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-flag">🇹🇷</div>
+        <div class="team-avatar">U</div>
+        <div class="team-name">Founder I</div>
+        <div class="team-role">Strategy & Growth</div>
+        <div class="team-school">Turkish · UMass Lowell</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-flag">🇹🇷</div>
+        <div class="team-avatar">U</div>
+        <div class="team-name">Founder II</div>
+        <div class="team-role">Creative & Content</div>
+        <div class="team-school">Turkish · UMass Lowell</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-flag">🇵🇸</div>
+        <div class="team-avatar">U</div>
+        <div class="team-name">Founder III</div>
+        <div class="team-role">Paid Media & Analytics</div>
+        <div class="team-school">Palestinian · Purdue University</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA ═════════════════════════════════════════════════ -->
+  <section id="cta">
+    <div class="cta-inner reveal">
+      <div class="section-eyebrow">Let's Work Together</div>
+      <h2>Ready to <span class="accent">Uplift</span><br/>Your Brand?</h2>
+      <p>Tell us what you're building. We'll tell you how to make people notice.</p>
+      <div class="cta-actions">
+        <a href="mailto:upliftmarketers@gmail.com" class="btn-primary">Get a Free Consultation</a>
+        <a href="#services" class="btn-ghost">View Services</a>
+      </div>
+      <p class="cta-email">Or email us directly at <a href="mailto:upliftmarketers@gmail.com">upliftmarketers@gmail.com</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ════════════════════════════════════════════ -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo" style="text-decoration:none;">
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:36px;height:36px;">
+            <polygon points="50,5 5,50 50,95 50,5" fill="#CC0000"/>
+            <polygon points="50,5 95,50 50,95 50,5" fill="#CC0000"/>
+            <rect x="47" y="5" width="6" height="90" fill="#0d0d0d"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span>UPLIFT</span>
+            <span>MARKETING</span>
+          </div>
+        </a>
+        <p>A digital marketing agency built on friendship and obsessed with results. Real people. Real strategy. Built different.</p>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#why">Why Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Services</h4>
+          <ul>
+            <li><a href="#services">Social Media</a></li>
+            <li><a href="#services">Paid Ads</a></li>
+            <li><a href="#services">SEO</a></li>
+            <li><a href="#services">Branding</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="mailto:upliftmarketers@gmail.com">Email Us</a></li>
+            <li><a href="#cta">Get Started</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Uplift Marketing. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ SCRIPTS ════════════════════════════════════════════ -->
+  <script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Hamburger menu
+    document.getElementById('menuToggle').addEventListener('click', function () {
+      const links = document.querySelector('.nav-links');
+      const isOpen = links.style.display === 'flex';
+      if (isOpen) {
+        links.style.display = '';
+      } else {
+        links.style.cssText = 'display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:rgba(13,13,13,0.98);backdrop-filter:blur(20px);padding:24px;gap:20px;border-bottom:1px solid #262626;';
+      }
+    });
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    reveals.forEach(el => observer.observe(el));
+
+    // Smooth anchor scroll with offset for fixed nav
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        const offset = 80;
+        window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+        // close mobile menu if open
+        document.querySelector('.nav-links').style.display = '';
+      });
+    });
+  </script>
+</body>
+</html>
